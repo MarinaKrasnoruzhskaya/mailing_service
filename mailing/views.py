@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from mailing.models import Client, Message
+from mailing.models import Client, Message, MailingSettings
 
 
 class ClientListView(ListView):
@@ -56,3 +56,30 @@ class MessageUpdateView(UpdateView):
 class MessageDeleteView(DeleteView):
     model = Message
     success_url = reverse_lazy('mailing:messages')
+
+
+class MailingSettingsListView(ListView):
+    model = MailingSettings
+
+
+class MailingSettingsDetailView(DetailView):
+    model = MailingSettings
+
+
+class MailingSettingsCreateView(CreateView):
+    model = MailingSettings
+    fields = '__all__'
+    success_url = reverse_lazy('mailing:settings')
+
+
+class MailingSettingsUpdateView(UpdateView):
+    model = MailingSettings
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('mailing:view_setting', args=[self.kwargs.get('pk')])
+
+
+class MailingSettingsDeleteView(DeleteView):
+    model = MailingSettings
+    success_url = reverse_lazy('mailing:settings')
