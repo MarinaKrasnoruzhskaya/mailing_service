@@ -13,3 +13,16 @@ class Client(models.Model):
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
+
+
+class Message(models.Model):
+    """Класс для модели сообщения для рассылки"""
+    theme = models.CharField(max_length=255, verbose_name='Тема письма', help_text='Введите тему письма')
+    body = models.TextField(verbose_name='Тело письма', help_text='Введите тело письма')
+
+    def __str__(self):
+        return self.theme
+
+    class Meta:
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
