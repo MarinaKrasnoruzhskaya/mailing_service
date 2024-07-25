@@ -21,3 +21,4 @@ class MailingSettingsAdmin(admin.ModelAdmin):
 @admin.register(MailingAttempt)
 class MailingAttemptAdmin(admin.ModelAdmin):
     list_display = ('datetime_last_try', 'attempt_status', 'response_mail_server', 'mailing')
+    list_filter = ('mailing',)
