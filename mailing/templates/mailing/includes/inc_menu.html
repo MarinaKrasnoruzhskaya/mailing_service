@@ -1,23 +1,24 @@
 <header data-bs-theme="dark">
-  <div class="collapse text-bg-dark" id="navbarHeader">
+  <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
       <div class="row">
         <div class="col-sm-8 col-md-7 py-4">
-          <h4>Сервис управления рассылками</h4>
+          <h4 class="text-white">Сервис управления рассылками</h4>
         </div>
         <div class="col-sm-4 offset-md-1 py-4">
-          <h4>Навигация</h4>
+          <h4 class="text-white">Навигация</h4>
           <ul class="list-unstyled">
-            <li><a href="{% url 'mailing:clients' %}" class="text-dark">Клиенты сервиса</a></li>
-            <li><a href="{% url 'mailing:messages' %}" class="text-dark">Сообщения для рассылок</a></li>
-            <li><a href="{% url 'mailing:settings' %}" class="text-dark">Рассылки</a></li>
+            <li><a href="{% url 'mailing:clients' %}" class="text-white">Клиенты сервиса</a></li>
+            <li><a href="{% url 'mailing:messages' %}" class="text-white">Сообщения для рассылок</a></li>
+            <li><a href="{% url 'mailing:settings' %}" class="text-white">Рассылки</a></li>
+            <li><a href="{% url 'mailing:attempts' %}" class="text-white">Отчет</a></li>
           </ul>
         </div>
       </div>
     </div>
   </div>
-  <div class="navbar navbar-dark bg-dark shadow-sm">
-    <div class="container">
+  <div class="navbar navbar-dark bg-dark box-shadow">
+    <div class="container d-flex justify-content-between">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

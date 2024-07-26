@@ -37,6 +37,27 @@
                             </tbody>
                         </table>
                     </div>
+                    {% if attempts %}
+                        <p class="card-text"><b>Попытки рассылок:</b></p>
+                        <div class="col-10">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Дата и время последней попытки рассылки</th>
+                                    <th scope="col">Статус попытки рассылки</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for attempt in attempts %}
+                                <tr>
+                                    <td>{{ attempt.datetime_last_try }}</td>
+                                    <td>{{ attempt.attempt_status }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
                     <a class="btn btn-outline-success me-md-2" href="{% url 'mailing:settings' %}" role="button">Назад</a>
                 </div>
             </div>

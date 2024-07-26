@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from mailing.models import Client, Message, MailingSettings
+from mailing.models import Client, Message, MailingSettings, MailingAttempt
 
 
 class ClientListView(ListView):
@@ -65,6 +65,11 @@ class MailingSettingsListView(ListView):
 class MailingSettingsDetailView(DetailView):
     model = MailingSettings
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['attempts'] = MailingAttempt.objects.filter(mailing=self.object).order_by('-datetime_last_try')
+        return context_data
+
 
 class MailingSettingsCreateView(CreateView):
     model = MailingSettings
@@ -83,3 +88,7 @@ class MailingSettingsUpdateView(UpdateView):
 class MailingSettingsDeleteView(DeleteView):
     model = MailingSettings
     success_url = reverse_lazy('mailing:settings')
+
+
+class MailingAttemptListView(ListView):
+    model = MailingAttempt

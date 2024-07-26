@@ -10,15 +10,17 @@
 </section>
 <div class="container">
     <a href="{% url 'mailing:create_setting' %}" class="btn btn-success my-2">Добавить рассылку</a>
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="row row-cols-3 row-cols-sm-2 row-cols-md-3 g-3">
         {% for object in object_list %}
-        <div class="col">
+        <div class="col-4">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <p class="card-text">{{ object.message }}</p>
-                    <p class="card-text">с {{ object.start_datetime }} по {{ object.end_datetime }} </p>
-                    <p class="card-text">{{ object.periodicity }}</p>
-                    <p class="card-text">{{ object.status }}</p>
+                    <p class="card-text"><b>Рассылка #{{ object.id }}</b></p>
+                    <p class="card-text">Тема: {{ object.message }}</p>
+                    <p class="card-text">с {{ object.start_datetime }}</p>
+                    <p class="card-text">по {{ object.end_datetime }} </p>
+                    <p class="card-text">Периодичность: {{ object.periodicity }}</p>
+                    <p class="card-text">{{ object.mailing_status }}</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
                             <a class="btn btn-outline-success" href="{% url 'mailing:view_setting' object.pk %}"

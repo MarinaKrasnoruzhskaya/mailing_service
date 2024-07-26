@@ -27,6 +27,7 @@ class Message(models.Model):
     class Meta:
         verbose_name = 'Сообщение'
         verbose_name_plural = 'Сообщения'
+        ordering = ['-id']
 
 
 class MailingSettings(models.Model):
@@ -82,6 +83,7 @@ class MailingSettings(models.Model):
     class Meta:
         verbose_name = 'Настройки рассылки'
         verbose_name_plural = 'Настройки рассылок'
+        ordering = ['-id']
 
 
 class MailingAttempt(models.Model):
@@ -121,3 +123,4 @@ class MailingAttempt(models.Model):
     class Meta:
         verbose_name = 'Попытка рассылки'
         verbose_name_plural = 'Попытки рассылок'
+        ordering = ['-id']
