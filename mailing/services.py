@@ -8,18 +8,35 @@ from django.core.mail import send_mail
 from mailing.models import MailingSettings, MailingAttempt
 
 
+def change_mailing_status():
+    """Функция изменения статуса рассылки"""
+    zone = pytz.timezone(settings.TIME_ZONE)
+    current_datetime = datetime.now(zone)
+
+    mailings = MailingSettings.objects.exclude(mailing_status='completed')
+    for mailing in mailings:
+        if mailing.end_datetime < current_datetime:
+            mailing.mailing_status = 'completed'
+            mailing.save(update_fields=['mailing_status'])
+        if mailing.mailing_status == 'created' and mailing.start_datetime <= current_datetime:
+            mailing.mailing_status = 'launched'
+            mailing.save(update_fields=['mailing_status'])
+
+
 def is_next_send_time(mailing: MailingSettings, attempt: MailingAttempt, current: datetime) -> bool:
     """Функция проверки на следующее время рассылки"""
     time_difference = current - attempt.datetime_last_try if attempt else 0
-    print(f'Time difference: {time_difference}')
-    if mailing.mailing_status == 'created' and mailing.start_datetime <= current <= mailing.end_datetime:
+
+    if attempt:
+        if mailing.periodicity == 'once a day' and time_difference >= timedelta(days=1):
+            return True
+        elif mailing.periodicity == 'once a week' and time_difference >= timedelta(days=7):
+            return True
+        elif mailing.periodicity == 'once a month' and time_difference >= timedelta(days=30):
+            return True
+    else:  # рассылка запущена, но попыток рассылки еще не было
         return True
-    elif mailing.periodicity == 'once a day' and time_difference >= timedelta(days=1):
-        return True
-    elif mailing.periodicity == 'once a week' and time_difference >= timedelta(days=7):
-        return True
-    elif mailing.periodicity == 'once a month' and time_difference >= timedelta(days=30):
-        return True
+
     return False
 
 
@@ -29,9 +46,7 @@ def send_mailing():
     current_datetime = datetime.now(zone)
 
     # выбираем все созданные или запущенные рассылки
-    mailings = MailingSettings.objects.filter(start_datetime__lte=current_datetime).filter(
-        mailing_status__in=['created', 'launched']
-    )
+    mailings = MailingSettings.objects.filter(mailing_status='launched')
 
     for mailing in mailings:
         attempts = MailingAttempt.objects.filter(mailing=mailing)  # получаем все попытки рассылки для текущей рассылки
@@ -59,11 +74,3 @@ def send_mailing():
                 datetime_last_try=current_datetime,
             )
             print('Рассылка отправлена')
-
-            if mailing.mailing_status == 'created':
-                mailing.mailing_status = 'launched'
-                mailing.save(update_fields=['mailing_status'])
-
-        if mailing.end_datetime <= current_datetime:
-            mailing.mailing_status = 'completed'
-            mailing.save(update_fields=['mailing_status'])

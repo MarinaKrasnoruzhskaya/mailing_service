@@ -147,5 +147,6 @@ SERVER_EMAIL = os.getenv("EMAIL_HOST_USER")
 EMAIL_ADMIN = os.getenv("EMAIL_HOST_USER")
 
 CRONJOBS = [
+    ('*/1 * * * *', 'mailing.services.change_mailing_status'),
     ('*/1 * * * *', 'mailing.services.send_mailing'),
 ]
