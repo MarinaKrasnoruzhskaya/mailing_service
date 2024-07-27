@@ -40,8 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_crontab',
-    'mailing',
+    "django_apscheduler",
     'django.contrib.admindocs',
+    'mailing',
 ]
 
 MIDDLEWARE = [
@@ -150,3 +151,7 @@ CRONJOBS = [
     ('*/1 * * * *', 'mailing.services.change_mailing_status'),
     ('*/1 * * * *', 'mailing.services.send_mailing'),
 ]
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+
+APSCHEDULER_RUN_NOW_TIMEOUT = 25

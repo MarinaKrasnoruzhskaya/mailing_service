@@ -2,6 +2,7 @@ import smtplib
 from datetime import datetime, timedelta
 
 import pytz
+from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
 from django.core.mail import send_mail
 
@@ -50,7 +51,7 @@ def send_mailing():
 
     for mailing in mailings:
         attempts = MailingAttempt.objects.filter(mailing=mailing)  # получаем все попытки рассылки для текущей рассылки
-        end_attempt = attempts.order_by('-datetime_last_try')[0] if attempts else None  # получаем последнюю попытку рассылки
+        end_attempt = attempts.order_by('-datetime_last_try')[0] if attempts else None  # получаем последнюю попытку
 
         if is_next_send_time(mailing, end_attempt, current_datetime):
             try:
@@ -74,3 +75,11 @@ def send_mailing():
                 datetime_last_try=current_datetime,
             )
             print('Рассылка отправлена')
+
+
+def start():
+    """Функция старта периодических задач"""
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(change_mailing_status, 'interval', seconds=59)
+    scheduler.add_job(send_mailing, 'interval', seconds=59)
+    scheduler.start()
