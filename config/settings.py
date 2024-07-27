@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_crontab',
-    'mailing'
+    'mailing',
+    'django.contrib.admindocs',
 ]
 
 MIDDLEWARE = [
