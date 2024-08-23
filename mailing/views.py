@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from mailing.forms import ClientForm, MessageForm, MailingSettingsForm
 from mailing.models import Client, Message, MailingSettings, MailingAttempt
 
 
@@ -14,13 +16,13 @@ class ClientDetailView(DetailView):
 
 class ClientCreateView(CreateView):
     model = Client
-    fields = '__all__'
+    form_class = ClientForm
     success_url = reverse_lazy('mailing:clients')
 
 
 class ClientUpdateView(UpdateView):
     model = Client
-    fields = '__all__'
+    form_class = ClientForm
 
     def get_success_url(self):
         return reverse('mailing:view_client', args=[self.kwargs.get('pk')])
@@ -41,13 +43,13 @@ class MessageDetailView(DetailView):
 
 class MessageCreateView(CreateView):
     model = Message
-    fields = '__all__'
+    form_class = MessageForm
     success_url = reverse_lazy('mailing:messages')
 
 
 class MessageUpdateView(UpdateView):
     model = Message
-    fields = '__all__'
+    form_class = MessageForm
 
     def get_success_url(self):
         return reverse('mailing:view_message', args=[self.kwargs.get('pk')])
@@ -73,13 +75,13 @@ class MailingSettingsDetailView(DetailView):
 
 class MailingSettingsCreateView(CreateView):
     model = MailingSettings
-    fields = '__all__'
+    form_class = MailingSettingsForm
     success_url = reverse_lazy('mailing:settings')
 
 
 class MailingSettingsUpdateView(UpdateView):
     model = MailingSettings
-    fields = '__all__'
+    form_class = MailingSettingsForm
 
     def get_success_url(self):
         return reverse('mailing:view_setting', args=[self.kwargs.get('pk')])
