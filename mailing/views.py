@@ -19,6 +19,13 @@ class ClientCreateView(CreateView):
     form_class = ClientForm
     success_url = reverse_lazy('mailing:clients')
 
+    def form_valid(self, form, **kwargs):
+        """Метод для автоматической привязки владельца клиента - пользователя"""
+        client = form.save()
+        client.owner = self.request.user
+        client.save()
+        return super().form_valid(form)
+
 
 class ClientUpdateView(UpdateView):
     model = Client
@@ -45,6 +52,13 @@ class MessageCreateView(CreateView):
     model = Message
     form_class = MessageForm
     success_url = reverse_lazy('mailing:messages')
+
+    def form_valid(self, form, **kwargs):
+        """Метод для автоматической привязки владельца сообщения - пользователя"""
+        message = form.save()
+        message.owner = self.request.user
+        message.save()
+        return super().form_valid(form)
 
 
 class MessageUpdateView(UpdateView):
@@ -77,6 +91,13 @@ class MailingSettingsCreateView(CreateView):
     model = MailingSettings
     form_class = MailingSettingsForm
     success_url = reverse_lazy('mailing:settings')
+
+    def form_valid(self, form, **kwargs):
+        """Метод для автоматической привязки владельца рассылки - пользователя"""
+        mailing = form.save()
+        mailing.owner = self.request.user
+        mailing.save()
+        return super().form_valid(form)
 
 
 class MailingSettingsUpdateView(UpdateView):

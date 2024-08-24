@@ -18,18 +18,18 @@ class ClientForm(StyleFormMixin, ModelForm):
     """Форма для добавления нового клиента и редактирования"""
     class Meta:
         model = Client
-        fields = '__all__'
+        exclude = ('owner', )
 
 
 class MessageForm(StyleFormMixin, ModelForm):
     """Форма для добавления нового сообщения и редактирования"""
     class Meta:
         model = Message
-        fields = '__all__'
+        exclude = ('owner', )
 
 
 class MailingSettingsForm(StyleFormMixin, ModelForm):
     """Форма для добавления новой рассылки и редактирования"""
     class Meta:
         model = MailingSettings
-        exclude = ('mailing_status', )
+        exclude = ('mailing_status', 'owner')

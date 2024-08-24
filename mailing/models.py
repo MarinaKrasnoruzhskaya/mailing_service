@@ -1,12 +1,24 @@
 from django.db import models
 from django.utils import timezone
 
+from users.models import User
+
+NULLABLE = {'blank': True, 'null': True}
+
 
 class Client(models.Model):
     """Класс для модели клиента - тех, кто получает рассылки"""
     email = models.EmailField(verbose_name='Email', help_text='Введите email', unique=True)
     name = models.CharField(max_length=150, verbose_name='Ф.И.О.', help_text='Введите Ф.И.О.')
-    comments = models.TextField(verbose_name='Комментарий', help_text='Введите комментарий', blank=True, null=True)
+    comments = models.TextField(verbose_name='Комментарий', help_text='Введите комментарий', **NULLABLE)
+
+    owner = models.ForeignKey(
+        User,
+        verbose_name='Владелец',
+        help_text='Укажите владельца',
+        **NULLABLE,
+        on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return f"{self.name} ({self.email})"
@@ -20,6 +32,14 @@ class Message(models.Model):
     """Класс для модели сообщение для рассылки"""
     theme = models.CharField(max_length=255, verbose_name='Тема письма', help_text='Введите тему письма')
     body = models.TextField(verbose_name='Тело письма', help_text='Введите тело письма')
+
+    owner = models.ForeignKey(
+        User,
+        verbose_name='Владелец',
+        help_text='Укажите владельца',
+        **NULLABLE,
+        on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return self.theme
@@ -75,6 +95,14 @@ class MailingSettings(models.Model):
         related_name='client_of',
         verbose_name='Клиенты для рассылки',
         help_text='Выберите клиентов для рассылки',
+    )
+
+    owner = models.ForeignKey(
+        User,
+        verbose_name='Владелец',
+        help_text='Укажите владельца',
+        **NULLABLE,
+        on_delete=models.SET_NULL
     )
 
     def __str__(self):
