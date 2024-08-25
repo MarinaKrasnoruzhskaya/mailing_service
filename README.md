@@ -100,6 +100,7 @@
 Пользователи:
 admin@mailing.com (admin123)
 manager@mailing.com (manager123)
+content@mailing.com (content123)
 krasnoruzhskayamarina@yandex.ru (cktcfhm1985)
 
 Построен с:
