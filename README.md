@@ -97,6 +97,11 @@
 
 2. Для перехода в административную панель воспользуйтесь ссылкой http://127.0.0.1:8000/admin/
 
+Пользователи:
+admin@mailing.com (admin123)
+manager@mailing.com (manager123)
+krasnoruzhskayamarina@yandex.ru (cktcfhm1985)
+
 Построен с:
 ---------------
 

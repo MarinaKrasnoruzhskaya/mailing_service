@@ -10,11 +10,11 @@ from mailing.models import MailingSettings, MailingAttempt
 
 
 def change_mailing_status():
-    """Функция изменения статуса рассылки"""
+    """Функция изменения статуса рассылок"""
     zone = pytz.timezone(settings.TIME_ZONE)
     current_datetime = datetime.now(zone)
 
-    mailings = MailingSettings.objects.exclude(mailing_status='completed')
+    mailings = MailingSettings.objects.exclude(mailing_status='completed').exclude(is_disabled=True)
     for mailing in mailings:
         if mailing.end_datetime < current_datetime:
             mailing.mailing_status = 'completed'
@@ -46,7 +46,7 @@ def send_mailing():
     zone = pytz.timezone(settings.TIME_ZONE)
     current_datetime = datetime.now(zone)
 
-    # выбираем все созданные или запущенные рассылки
+    # выбираем все запущенные рассылки
     mailings = MailingSettings.objects.filter(mailing_status='launched')
 
     for mailing in mailings:

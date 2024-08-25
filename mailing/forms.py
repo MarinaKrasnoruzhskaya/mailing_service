@@ -32,4 +32,4 @@ class MailingSettingsForm(StyleFormMixin, ModelForm):
     """Форма для добавления новой рассылки и редактирования"""
     class Meta:
         model = MailingSettings
-        exclude = ('mailing_status', 'owner')
+        exclude = ('mailing_status', 'owner', 'is_disabled')

@@ -104,6 +104,7 @@ class MailingSettings(models.Model):
         **NULLABLE,
         on_delete=models.SET_NULL
     )
+    is_disabled = models.BooleanField(verbose_name='Отключена менеджером', **NULLABLE, default=False)
 
     def __str__(self):
         return f"Рассылка {self.pk}: с {self.start_datetime} с периодичностью {self.periodicity}"
@@ -112,6 +113,9 @@ class MailingSettings(models.Model):
         verbose_name = 'Настройки рассылки'
         verbose_name_plural = 'Настройки рассылок'
         ordering = ['-id']
+        permissions = [
+            ("сan_disable_mailings", "Сan disable mailings"),
+        ]
 
 
 class MailingAttempt(models.Model):

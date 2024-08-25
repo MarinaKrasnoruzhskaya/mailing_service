@@ -17,6 +17,9 @@
                     <p class="card-text"><b>Период:</b> с {{ object.start_datetime }} по {{ object.end_datetime }} </p>
                     <p class="card-text"><b>Периодичность:</b> {{ object.periodicity }}</p>
                     <p class="card-text"><b>Статус рассылки:</b> {{ object.mailing_status }}</p>
+                    {% if object.is_disabled %}
+                    <p class="card-text bg-danger text-white"><b>Отключена менеджером</b> </p>
+                    {% endif %}
                     <p class="card-text"><b>Сообщение:</b> {{ object.message.body }}</p>
                     <p class="card-text"><b>Клиенты:</b></p>
                     <div class="col-10">
