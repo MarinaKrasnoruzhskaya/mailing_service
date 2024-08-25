@@ -32,7 +32,7 @@
                             <a class="btn btn-outline-success" href="{% url 'mailing:view_setting' object.pk %}"
                                role="button">View</a>
                             {% endif %}
-                            {% if perms.mailing.can_disable_mailings or user.is_superuser %}
+                            {% if perms.mailing.сan_disable_mailings or user.is_superuser %}
                                 {% if object.is_disabled %}
                                     <a class="btn btn-warning" href="{% url 'mailing:disable_mailing' object.pk %}" >Включить</a>
                                 {% else %}
