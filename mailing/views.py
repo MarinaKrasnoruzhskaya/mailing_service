@@ -3,11 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
+from blog.models import BlogPost
 from mailing.forms import ClientForm, MessageForm, MailingSettingsForm
 from mailing.models import Client, Message, MailingSettings, MailingAttempt
-from mailing.services import change_mailing_status
 
 
 class ClientListView(LoginRequiredMixin, ListView):
@@ -119,7 +119,8 @@ class MailingSettingsDetailView(LoginRequiredMixin, DetailView):
         user = self.request.user
         if user.is_authenticated:
             if user.is_superuser or user.has_perm('mailing.view_mailingsettings') or user.id == self.object.owner_id:
-                context_data['attempts'] = MailingAttempt.objects.filter(mailing=self.object).order_by('-datetime_last_try')
+                context_data['attempts'] = MailingAttempt.objects.filter(mailing=self.object).order_by(
+                    '-datetime_last_try')
                 return context_data
         raise PermissionDenied
 
@@ -166,3 +167,17 @@ class MailingSettingsDeleteView(LoginRequiredMixin, DeleteView):
 
 class MailingAttemptListView(LoginRequiredMixin, ListView):
     model = MailingAttempt
+
+
+class IndexView(TemplateView):
+    """Контроллер для главной страницы"""
+    template_name = "mailing/index.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['mailing_count'] = MailingSettings.objects.all().count()
+        context['active_mailing_count'] = MailingSettings.objects.filter(mailing_status='launched').filter(
+            is_disabled=False).count()
+        context['unique_clients_count'] = Client.objects.values_list('email', flat=True).distinct().count()
+        context["blog_list"] = BlogPost.objects.exclude(is_published=False).order_by('?')[:3]
+        return context
