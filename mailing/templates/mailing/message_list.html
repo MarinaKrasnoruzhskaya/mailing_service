@@ -10,7 +10,9 @@
 </section>
 <div class="album py-5 bg-body-tertiary">
     <div class="container">
+        {% if perms.mailing.add_message %}
         <a href="{% url 'mailing:create_message' %}" class="btn btn-success my-2">Добавить сообщение</a>
+        {% endif %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for object in object_list %}
             <div class="col">

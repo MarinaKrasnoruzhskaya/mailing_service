@@ -9,7 +9,7 @@
     </div>
 </section>
 <div class="container">
-    {% if user.is_authenticated %}
+    {% if perms.mailing.add_mailingsettings %}
     <a href="{% url 'mailing:create_setting' %}" class="btn btn-success my-2">Добавить рассылку</a>
     {% endif %}
     <div class="row row-cols-3 row-cols-sm-2 row-cols-md-3 g-3">

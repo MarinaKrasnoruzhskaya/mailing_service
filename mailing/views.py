@@ -10,26 +10,33 @@ from mailing.forms import ClientForm, MessageForm, MailingSettingsForm
 from mailing.models import Client, Message, MailingSettings, MailingAttempt
 
 
-class ClientListView(LoginRequiredMixin, ListView):
+class ClientListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     """Контроллер для вывода списка клиентов"""
     model = Client
+    permission_required = 'mailing.view_client'
 
     def get_queryset(self, *args, **kwargs):
         """Метод выбирает клиентов, созданных авторизованным пользователем"""
         queryset = super().get_queryset(*args, **kwargs)
         user = self.request.user
+        if user.is_authenticated:
+            if not user.is_superuser or not user.has_perm('mailing.view_client'):
+                queryset = queryset.filter(owner=self.request.user)
+            return queryset
+        raise PermissionDenied
 
-        queryset = queryset.filter(owner=self.request.user)
-        return queryset
 
-
-class ClientDetailView(LoginRequiredMixin, DetailView):
+class ClientDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    """Контроллер для вывода детальной информации о клиенте"""
     model = Client
+    permission_required = 'mailing.view_client'
 
 
-class ClientCreateView(LoginRequiredMixin, CreateView):
+class ClientCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    """Контроллер для создания клиента"""
     model = Client
     form_class = ClientForm
+    permission_required = 'mailing.add_client'
     success_url = reverse_lazy('mailing:clients')
 
     def form_valid(self, form, **kwargs):
@@ -40,37 +47,50 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ClientUpdateView(LoginRequiredMixin, UpdateView):
+class ClientUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    """Контроллер для редактирования клиента"""
     model = Client
     form_class = ClientForm
+    permission_required = 'mailing.change_client'
 
     def get_success_url(self):
         return reverse('mailing:view_client', args=[self.kwargs.get('pk')])
 
 
-class ClientDeleteView(LoginRequiredMixin, DeleteView):
+class ClientDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    """Контроллер для удаления клиента"""
     model = Client
+    permission_required = 'mailing.delete_client'
     success_url = reverse_lazy('mailing:clients')
 
 
-class MessageListView(LoginRequiredMixin, ListView):
+class MessageListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     """Контроллер для вывода списка сообщений"""
     model = Message
+    permission_required = 'mailing.view_message'
 
     def get_queryset(self, *args, **kwargs):
-        """Метод выбирает сообщения, созданные авторизованным пользователем"""
+        """Метод выбирает сообщения, созданные авторизованным пользователем или все сообщения для суперюзера"""
         queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(owner=self.request.user)
-        return queryset
+        user = self.request.user
+        if user.is_authenticated:
+            if not user.is_superuser or not user.has_perm('mailing.view_message'):
+                queryset = queryset.filter(owner=self.request.user)
+            return queryset
+        raise PermissionDenied
 
 
-class MessageDetailView(LoginRequiredMixin, DetailView):
+class MessageDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
+    """Контроллер для вывода детальной информации о сообщении"""
     model = Message
+    permission_required = 'mailing.view_message'
 
 
-class MessageCreateView(LoginRequiredMixin, CreateView):
+class MessageCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    """Контроллер для создания сообщения"""
     model = Message
     form_class = MessageForm
+    permission_required = 'mailing.add_message'
     success_url = reverse_lazy('mailing:messages')
 
     def form_valid(self, form, **kwargs):
@@ -81,22 +101,27 @@ class MessageCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class MessageUpdateView(LoginRequiredMixin, UpdateView):
+class MessageUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    """Контроллер для редактирования сообщения"""
     model = Message
     form_class = MessageForm
+    permission_required = 'mailing.change_message'
 
     def get_success_url(self):
         return reverse('mailing:view_message', args=[self.kwargs.get('pk')])
 
 
-class MessageDeleteView(LoginRequiredMixin, DeleteView):
+class MessageDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    """Контроллер для удаления сообщения"""
     model = Message
+    permission_required = 'mailing.delete_message'
     success_url = reverse_lazy('mailing:messages')
 
 
-class MailingSettingsListView(LoginRequiredMixin, ListView):
+class MailingSettingsListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     """Контроллер для вывода списка рассылок"""
     model = MailingSettings
+    permission_required = 'mailing.view_mailingsettings'
 
     def get_queryset(self, *args, **kwargs):
         """Метод выбирает все рассылки для менеджера и суперпользователя
@@ -110,11 +135,13 @@ class MailingSettingsListView(LoginRequiredMixin, ListView):
         raise PermissionDenied
 
 
-class MailingSettingsDetailView(LoginRequiredMixin, DetailView):
+class MailingSettingsDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     """Контроллер для просмотра рассылки"""
     model = MailingSettings
+    permission_required = 'mailing.view_mailingsettings'
 
     def get_context_data(self, **kwargs):
+        """Метод выбирает попытки рассылок для данной рассылки"""
         context_data = super().get_context_data(**kwargs)
         user = self.request.user
         if user.is_authenticated:
@@ -128,6 +155,7 @@ class MailingSettingsDetailView(LoginRequiredMixin, DetailView):
 @login_required
 @permission_required('mailing.сan_disable_mailings')
 def disable_mailing_settings(request, pk):
+    """Контроллер для отключения рассылки"""
     mailing_settings_item = get_object_or_404(MailingSettings, pk=pk)
     if mailing_settings_item.is_disabled:
         mailing_settings_item.is_disabled = False
@@ -139,9 +167,11 @@ def disable_mailing_settings(request, pk):
     return redirect(reverse('mailing:settings'))
 
 
-class MailingSettingsCreateView(LoginRequiredMixin, CreateView):
+class MailingSettingsCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    """Контроллер для создания рассылки"""
     model = MailingSettings
     form_class = MailingSettingsForm
+    permission_required = 'mailing.add_mailingsettings'
     success_url = reverse_lazy('mailing:settings')
 
     def form_valid(self, form, **kwargs):
@@ -152,21 +182,43 @@ class MailingSettingsCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class MailingSettingsUpdateView(LoginRequiredMixin, UpdateView):
+class MailingSettingsUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    """Контроллер для редактирования рассылки"""
     model = MailingSettings
     form_class = MailingSettingsForm
+    permission_required = 'mailing.change_mailingsettings'
 
     def get_success_url(self):
         return reverse('mailing:view_setting', args=[self.kwargs.get('pk')])
 
 
 class MailingSettingsDeleteView(LoginRequiredMixin, DeleteView):
+    """Контроллер для удаления рассылки"""
     model = MailingSettings
+    permission_required = 'mailing.delete_mailingsettings'
     success_url = reverse_lazy('mailing:settings')
 
 
-class MailingAttemptListView(LoginRequiredMixin, ListView):
+class MailingAttemptListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    """Контроллер для вывода списка попыток рассылок"""
     model = MailingAttempt
+    permission_required = 'mailing.view_mailingattempt'
+
+    def get_context_data(self, *args, **kwargs):
+        """Метод выбирает все попытки рассылок для суперпользователя
+        или попытки рассылок, созданные авторизованным пользователем"""
+        context_data = super().get_context_data(*args, **kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            if not user.is_superuser and user.has_perm('mailing.view_mailingattempt'):
+                mailings = MailingSettings.objects.filter(owner_id=user.id)
+                attempts = []
+                for mailing in mailings:
+                    attemps_mailing = self.object_list.filter(mailing_id=mailing.id)
+                    attempts.extend(attemps_mailing)
+                context_data['object_list'] = attempts
+            return context_data
+        raise PermissionDenied
 
 
 class IndexView(TemplateView):
@@ -174,6 +226,7 @@ class IndexView(TemplateView):
     template_name = "mailing/index.html"
 
     def get_context_data(self, **kwargs):
+        """Метод передает кол-во всего рассылок, активных рассылок, уникальных клиентов и 3 случайных статьи из блога"""
         context = super().get_context_data(**kwargs)
         context['mailing_count'] = MailingSettings.objects.all().count()
         context['active_mailing_count'] = MailingSettings.objects.filter(mailing_status='launched').filter(

@@ -11,6 +11,7 @@ from django.views.generic import CreateView, UpdateView, ListView
 from config import settings
 from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
+from users.services import add_permission_user
 
 
 class UserCreateView(CreateView):
@@ -41,6 +42,7 @@ def email_verification(request, token):
     user = get_object_or_404(User, token=token)
     user.is_active = True
     user.save()
+    add_permission_user(user)
     return redirect(reverse('users:login'))
 
 

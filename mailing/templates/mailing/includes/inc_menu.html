@@ -7,8 +7,12 @@
             <li class="nav-item"><a class="nav-link text-white"  href="{% url 'mailing:index' %}">Главная</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="{% url 'blog:list' %}">Блог</a></li>
             {% if user.is_authenticated %}
-            <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:clients' %}">Клиенты</a></li>
-            <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:messages' %}">Сообщения</a></li>
+              {% if user.is_superuser or perms.mailing.view_client %}
+                <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:clients' %}">Клиенты</a></li>
+              {% endif %}
+              {% if user.is_superuser or perms.mailing.view_message %}
+                 <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:messages' %}">Сообщения</a></li>
+              {% endif %}
             <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:settings' %}">Рассылки</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:attempts' %}">Отчет</a></li>
             {% if user.is_superuser or perms.users.сan_block_user %}

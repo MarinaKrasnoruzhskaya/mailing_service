@@ -6,7 +6,7 @@
     <h3 class="display-0">Рассылки: интересные факты</h3>
 </div>
 <div class="container">
-    {% if user.is_authenticated %}
+    {% if perms.blog.add_blogpost %}
     <div class="col-12 mb-5">
         <a class="btn btn-danger" href="{% url 'blog:create' %}" role="button">Добавить запись</a>
     </div>
