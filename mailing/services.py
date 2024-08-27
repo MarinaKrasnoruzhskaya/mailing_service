@@ -4,9 +4,10 @@ from datetime import datetime, timedelta
 import pytz
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.conf import settings
+from django.core.cache import cache
 from django.core.mail import send_mail
 
-from mailing.models import MailingSettings, MailingAttempt
+from mailing.models import MailingSettings, MailingAttempt, Client
 
 
 def change_mailing_status():
@@ -83,3 +84,28 @@ def start():
     scheduler.add_job(change_mailing_status, 'interval', seconds=59)
     scheduler.add_job(send_mailing, 'interval', seconds=59)
     scheduler.start()
+
+
+def get_statistic_mailing_for_cache():
+    """Функция получает количество всех рассылок, активных рассылок и количество уникальных клиентов
+     из кэша или из БД и тогда записывает в кэш"""
+    if settings.CACHE_ENABLED:
+        key = 'statistic_mailing'
+        statistic_mailing = cache.get(key)
+        if statistic_mailing is None:
+            statistic_mailing = {
+                'mailing_count': MailingSettings.objects.all().count(),
+                'active_mailing_count': MailingSettings.objects.filter(mailing_status='launched').filter(
+                    is_disabled=False).count(),
+                'unique_clients_count': Client.objects.values_list('email', flat=True).distinct().count()
+            }
+            cache.set(key, statistic_mailing)
+    else:
+        statistic_mailing = {
+            'mailing_count': MailingSettings.objects.all().count(),
+            'active_mailing_count': MailingSettings.objects.filter(mailing_status='launched').filter(
+                is_disabled=False).count(),
+            'unique_clients_count': Client.objects.values_list('email', flat=True).distinct().count()
+        }
+
+    return statistic_mailing

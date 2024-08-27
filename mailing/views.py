@@ -6,8 +6,10 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 
 from blog.models import BlogPost
+from blog.services import get_blogpost_for_cache
 from mailing.forms import ClientForm, MessageForm, MailingSettingsForm
 from mailing.models import Client, Message, MailingSettings, MailingAttempt
+from mailing.services import get_statistic_mailing_for_cache
 
 
 class ClientListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
@@ -228,9 +230,8 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         """Метод передает кол-во всего рассылок, активных рассылок, уникальных клиентов и 3 случайных статьи из блога"""
         context = super().get_context_data(**kwargs)
-        context['mailing_count'] = MailingSettings.objects.all().count()
-        context['active_mailing_count'] = MailingSettings.objects.filter(mailing_status='launched').filter(
-            is_disabled=False).count()
-        context['unique_clients_count'] = Client.objects.values_list('email', flat=True).distinct().count()
-        context["blog_list"] = BlogPost.objects.exclude(is_published=False).order_by('?')[:3]
+        context['mailing_count'] = get_statistic_mailing_for_cache()['mailing_count']
+        context['active_mailing_count'] = get_statistic_mailing_for_cache()['active_mailing_count']
+        context['unique_clients_count'] = get_statistic_mailing_for_cache()['unique_clients_count']
+        context["blog_list"] = get_blogpost_for_cache().order_by('?')[:3]
         return context
