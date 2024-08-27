@@ -15,7 +15,8 @@ class BlogPost(models.Model):
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано', help_text='Опубликовать блог?')
     views_count = models.IntegerField(default=0, verbose_name='Просмотры', help_text='Количество просмотров блога',
                                       editable=False)
-    author = models.ForeignKey(User, verbose_name='Автор', help_text='Укажите автора', **NULLABLE, on_delete=models.SET_NULL)
+    author = models.ForeignKey(User, verbose_name='Автор', help_text='Укажите автора', **NULLABLE,
+                               on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title

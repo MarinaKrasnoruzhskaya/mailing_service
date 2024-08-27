@@ -7,7 +7,6 @@ from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from dotenv import load_dotenv
 from pytils.translit import slugify
 
 from blog.forms import BlogPostForm, BlogPostUpdateForm
