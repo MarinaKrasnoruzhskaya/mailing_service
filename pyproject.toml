@@ -19,6 +19,7 @@ phonenumberslite = "^8.13.43"
 django-phonenumber-field = "^8.0.0"
 pytils = "^0.4.1"
 pillow = "^10.4.0"
+redis = "^5.0.8"
 
 
 [build-system]
