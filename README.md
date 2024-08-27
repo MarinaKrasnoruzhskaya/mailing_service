@@ -34,16 +34,8 @@
    ```sh
    poetry update
    ```
-7. Создать файл ```.env``` следующего содержания:
-   ```
-   DB_USER=local_db_user
-   DB_PASSWORD=local_db_password
-   DB_HOST=local_db_host
-   DB_PORT=local_db_port
-   EMAIL_HOST_USER = your_email@yandex.ru
-   EMAIL_HOST_PASSWORD = your_yandex_smtp_password
-   EMAIL_USER = user_email@yandex.ru
-   ```
+7. Заполнить и переименовать ```.env.sample``` в файл с именем ```.env```:
+
 8. Создать БД ```mailing```
    ```
    psql -U postgres
@@ -58,6 +50,8 @@
    ```sh
    python manage.py fill
    ```
+11. Запустить  ```redis-server``` 
+
 
 Руководство по использованию
 ---------------
@@ -66,8 +60,7 @@
   ```sh
    python manage.py runserver
    ```
-2. После запуска сервера перейдите по ссылке http://127.0.0.1:8000/ и будет отображена домашняя страница проекта. На
-   домашней странице представлен список рассылок
+2. После запуска сервера перейдите по ссылке http://127.0.0.1:8000/ и будет отображена главная страница проекта. 
 
 Управление попытками рассылок
 ---------------
@@ -78,11 +71,11 @@
    python manage.py crontab add
    ```
 2. Для ```APScheduler``` из командной строки выполнить команду
-  ```sh
+   ```sh
    python manage.py runapscheduler
    ```
    или в файле ```mailing/app.py``` сделать активными строки 10-13 и выполнить команду
-```sh
+   ```sh
    python manage.py runserver
    ```
 
@@ -92,16 +85,17 @@
 1. Для создания суперпользователя
 
   ```sh
-   python manage.py createsuperuser
+   python manage.py csu
    ```
 
 2. Для перехода в административную панель воспользуйтесь ссылкой http://127.0.0.1:8000/admin/
 
-Пользователи:
-admin@mailing.com (admin123)
-manager@mailing.com (manager123)
-content@mailing.com (content123)
-krasnoruzhskayamarina@yandex.ru (cktcfhm1985)
+Пользователи проекта
+---------------
+- admin@mailing.com (admin123)
+- manager@mailing.com (manager123)
+- content@mailing.com (content123)
+- krasnoruzhskayamarina@yandex.ru (cktcfhm1985)
 
 Построен с:
 ---------------
