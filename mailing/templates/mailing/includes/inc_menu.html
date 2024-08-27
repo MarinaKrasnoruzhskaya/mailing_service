@@ -14,7 +14,9 @@
                  <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:messages' %}">Сообщения</a></li>
               {% endif %}
             <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:settings' %}">Рассылки</a></li>
+              {% if user.is_superuser or perms.mailing.view_mailingattampt %}
             <li class="nav-item"><a class="nav-link text-white" href="{% url 'mailing:attempts' %}">Отчет</a></li>
+              {% endif %}
             {% if user.is_superuser or perms.users.сan_block_user %}
             <li class="nav-item"><a class="nav-link text-white" href="{% url 'users:list' %}">Пользователи</a></li>
             {% endif %}
