@@ -12,6 +12,7 @@ from pytils.translit import slugify
 
 from blog.forms import BlogPostForm, BlogPostUpdateForm
 from blog.models import BlogPost
+from blog.services import get_blogpost_for_cache
 
 
 class BlogPostListView(ListView):
@@ -19,16 +20,8 @@ class BlogPostListView(ListView):
     model = BlogPost
 
     def get_queryset(self, *args, **kwargs):
-        """Метод возвращает для контент-менеджера все посты, для остальных пользователей только опубликованные"""
-        queryset = super().get_queryset(*args, **kwargs)
-        user = self.request.user
-        user_group = Group.objects.filter(user=user).first() if user.is_authenticated else []
-        group = Group.objects.get(name='content-manager')
-        if user_group and user_group.pk == group.pk or user.is_superuser:
-            return queryset
-        else:
-            queryset = queryset.filter(is_published=True)
-            return queryset
+        """Метод возвращает опубликованные блоговые записи из БД или из кэша"""
+        return get_blogpost_for_cache()
 
 
 class BlogPostDetailView(DetailView):
