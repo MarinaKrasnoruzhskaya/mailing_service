@@ -12,7 +12,7 @@ class BlogPost(models.Model):
     preview = models.ImageField(upload_to='blog/', verbose_name='Превью', help_text="Загрузите превью",
                                 **NULLABLE, )
     created_at = models.DateTimeField(verbose_name="Дата создания", auto_now_add=True, )
-    is_published = models.BooleanField(default=True, verbose_name='Опубликовано', help_text='Опубликовать блог?')
+    is_published = models.BooleanField(default=False, verbose_name='Опубликовано', help_text='Опубликовать блог?')
     views_count = models.IntegerField(default=0, verbose_name='Просмотры', help_text='Количество просмотров блога',
                                       editable=False)
     author = models.ForeignKey(User, verbose_name='Автор', help_text='Укажите автора', **NULLABLE, on_delete=models.SET_NULL)
