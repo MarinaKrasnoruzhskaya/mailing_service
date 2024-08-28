@@ -60,10 +60,30 @@
     }
   },
   {
+    "model": "mailing.client",
+    "pk": 9,
+    "fields": {
+      "email": "test_mail@mail.com",
+      "name": "test mail",
+      "comments": "",
+      "owner": 5
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 10,
+    "fields": {
+      "email": "test_gmail@gmail.com",
+      "name": "test gmail",
+      "comments": "",
+      "owner": 5
+    }
+  },
+  {
     "model": "mailing.message",
     "pk": 1,
     "fields": {
-      "theme": "Платите меньше \uD83D\uDD25 Горячие предложения июля",
+      "theme": "Платите меньше 🔥 Горячие предложения июля",
       "body": "Мы рады поделиться с вами специальными предложениями на этот месяц. В августе вас ждут акции, которые помогут вам сэкономить и приобрести товары по выгодным ценам! С уважение, магазин детской одежды.",
       "owner": 1
     }
@@ -105,6 +125,15 @@
     }
   },
   {
+    "model": "mailing.message",
+    "pk": 6,
+    "fields": {
+      "theme": "Бантики для юных леди!",
+      "body": "Большой выбор бантиков для сада, прогулки, праздника. Подробнее на сайте bowshop.ru. С уважением, магазин BowShop.",
+      "owner": 5
+    }
+  },
+  {
     "model": "mailing.mailingsettings",
     "pk": 1,
     "fields": {
@@ -132,8 +161,8 @@
       "owner": 1,
       "is_disabled": false,
       "clients": [
-        5,
-        4
+        4,
+        5
       ]
     }
   },
@@ -149,9 +178,9 @@
       "owner": 1,
       "is_disabled": false,
       "clients": [
-        5,
+        1,
         4,
-        1
+        5
       ]
     }
   },
@@ -315,6 +344,23 @@
         5,
         6,
         7
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 15,
+    "fields": {
+      "start_datetime": "2024-08-28T06:40:00Z",
+      "end_datetime": "2024-08-30T18:00:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "created",
+      "message": 6,
+      "owner": 5,
+      "is_disabled": false,
+      "clients": [
+        9,
+        10
       ]
     }
   },
@@ -726,6 +772,16 @@
       "attempt_status": "Successfully",
       "response_mail_server": "",
       "mailing": 14
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 47,
+    "fields": {
+      "datetime_last_try": "2024-08-28T09:53:00.935Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 13
     }
   }
 ]
