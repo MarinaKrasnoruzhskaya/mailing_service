@@ -80,7 +80,7 @@ class MailingSettings(models.Model):
         verbose_name='Статус рассылки',
         help_text='Выберите статус рассылки',
         choices=STATUSES,
-        default='создана',
+        default='created',
     )
 
     message = models.ForeignKey(
@@ -126,7 +126,7 @@ class MailingAttempt(models.Model):
 
     datetime_last_try = models.DateTimeField(
         verbose_name='Дата и время последней попытки рассылки',
-        auto_now=True,
+        # auto_now=True,
     )
     attempt_status = models.CharField(
         verbose_name='Статус попытки рассылки',
