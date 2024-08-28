@@ -1,0 +1,29 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-8 col-md-8 mx-auto">
+            <h1 class="fw-light">Сообщение для рассылки #{{ object.id }}</h1>
+
+        </div>
+    </div>
+</section>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-text">Тема: {{ object.theme }}</h4>
+                        <p class="card-text">{{ object.body }}</p>
+                        <a class="btn btn-outline-success me-md-2" href="{% url 'mailing:messages' %}" role="button">Назад</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-8 col-md-8 mx-auto">
+            <h1 class="fw-light">Отчет проведенных рассылок</h1>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row row-cols-3 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+            <table class="table ">
+                <thead>
+                <tr>
+                    <th class="align-middle" scope="col">Дата и время последней попытки рассылки</th>
+                    <th class="align-middle" scope="col">Статус попытки рассылки</th>
+                    <th class="align-middle" scope="col">Ответ почтового сервера</th>
+                    <th class="align-middle" scope="col">Рассылка</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.datetime_last_try }}</td>
+                    <td>{{ object.attempt_status }}</td>
+                    <td>{{ object.response_mail_server }}</td>
+                    <td>{{ object.mailing }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

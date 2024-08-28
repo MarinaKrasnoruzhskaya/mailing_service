@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <script src="{% static 'js/color-modes.js' %}"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title %}{{ title }} - {% endif %}Cервис управления рассылками</title>
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+{% include 'mailing/includes/inc_menu.html' %}
+
+<main>
+    <div class="container">
+        <h1 class="text-center mt-5">Сервис управления рассылками, администрирования и получения статистики</h1>
+    </div>
+    <div class="album">
+    {% block content %}
+    {% endblock %}
+    </div>
+
+</main>
+
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="container">
+        <p>&copy; Сервис управления рассылками {% now 'Y' %}</p>
+    </div>
+</footer>
+
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>

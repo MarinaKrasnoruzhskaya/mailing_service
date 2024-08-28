@@ -1,0 +1,50 @@
+{% extends 'mailing/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h2 class="display-0">Блог</h2>
+    <h3 class="display-0">Рассылки: интересные факты</h3>
+</div>
+<div class="container">
+    {% if perms.blog.add_blogpost %}
+    <div class="col-12 mb-5">
+        <a class="btn btn-danger" href="{% url 'blog:create' %}" role="button">Добавить запись</a>
+    </div>
+    {% endif %}
+</div>
+<div class="container">
+    <div class="row">
+        {% for object in object_list %}
+        <div class="col-6">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h3 class="mb-0">{{ object}}</h3>
+                    <div class="mb-1 text-danger">{{ object.created_at | date:"SHORT_DATE_FORMAT" }}</div>
+                    <p class="card-text text-left">{{ object.content | truncatechars:100 }}</p>
+                    {% if perms.blog.change_blogpost and not object.is_published %}
+                    <div class="row">
+                        <div class="col-5">
+                            <p class="p-1 mb-2 bg-warning text-warning-emphasis">НЕ ОПУБЛИКОВАНО</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="btn-group">
+                        <a class="btn btn-outline-danger" href="{% url 'blog:view' object.pk %}"
+                           role="button">Подробнее</a>
+                        {% if perms.blog.change_blogpost or user.id == object.author_id %}
+                        <a class="btn btn-outline-danger" href="{% url 'blog:update' object.pk %}"
+                           role="button">Изменить</a>
+                        {% endif %}
+                        {% if perms.blog.delete_blogpost %}
+                        <a class="btn btn-outline-danger" href="{% url 'blog:delete' object.pk %}"
+                           role="button">Удалить</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

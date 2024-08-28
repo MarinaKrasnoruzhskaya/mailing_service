@@ -1,0 +1,72 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Рассылка #{{ object.id }}</h1>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <p class="card-text"><b>Тема:</b> {{ object.message }}</p>
+                    <p class="card-text"><b>Период:</b> с {{ object.start_datetime }} по {{ object.end_datetime }} </p>
+                    <p class="card-text"><b>Периодичность:</b> {{ object.periodicity }}</p>
+                    <p class="card-text"><b>Статус рассылки:</b> {{ object.mailing_status }}</p>
+                    {% if object.is_disabled %}
+                    <p class="card-text bg-danger text-white"><b>Отключена менеджером</b> </p>
+                    {% endif %}
+                    <p class="card-text"><b>Сообщение:</b> {{ object.message.body }}</p>
+                    <p class="card-text"><b>Клиенты:</b></p>
+                    <div class="col-10">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">email</th>
+                                <th scope="col">name</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for obj in object.clients.all %}
+                            <tr>
+                                <td>{{ obj.email }}</td>
+                                <td>{{ obj.name }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% if attempts %}
+                        <p class="card-text"><b>Попытки рассылок:</b></p>
+                        <div class="col-10">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Дата и время последней попытки рассылки</th>
+                                    <th scope="col">Статус попытки рассылки</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for attempt in attempts %}
+                                <tr>
+                                    <td>{{ attempt.datetime_last_try }}</td>
+                                    <td>{{ attempt.attempt_status }}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
+                    <a class="btn btn-outline-success me-md-2" href="{% url 'mailing:settings' %}" role="button">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

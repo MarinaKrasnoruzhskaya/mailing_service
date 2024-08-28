@@ -1,0 +1,48 @@
+{% extends 'mailing/base.html' %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+
+    <div class="container ">
+        <div class="col-md-8 offset-md-2 text-center" >
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Всего рассылок</th>
+                    <th scope="col">Активных рассылок</th>
+                    <th scope="col">Уникальных клиентов</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ mailing_count }}</td>
+                    <td>{{ active_mailing_count }}</td>
+                    <td>{{ unique_clients_count }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h3 class="display-0">Рассылки: интересные факты</h3>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for object in blog_list %}
+            <div class="col-md-10 offset-md-1">
+            <div class="card mb-4 box-shadow">
+                <div class="card-body">
+                    <h3 class="mb-0">{{ object}}</h3>
+                    <div class="mb-1 text-danger">{{ object.created_at | date:"SHORT_DATE_FORMAT" }}</div>
+                    <p class="card-text text-left">{{ object.content | truncatechars:100 }}</p>
+                    <div class="btn-group">
+                        <a class="btn btn-outline-danger" href="{% url 'blog:view' object.pk %}"
+                           role="button">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

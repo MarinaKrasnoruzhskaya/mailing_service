@@ -1,0 +1,787 @@
+[
+  {
+    "model": "mailing.client",
+    "pk": 1,
+    "fields": {
+      "email": "test@test.test",
+      "name": "Test Test Test",
+      "comments": "Test",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 4,
+    "fields": {
+      "email": "Test2@test2.test",
+      "name": "Test2",
+      "comments": "",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 5,
+    "fields": {
+      "email": "Krasnoruzhskayamarina@yandex.ru",
+      "name": "Test",
+      "comments": "",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 6,
+    "fields": {
+      "email": "test@mail.ru",
+      "name": "Test mail",
+      "comments": "",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 7,
+    "fields": {
+      "email": "test@gmail.com",
+      "name": "Test gmail",
+      "comments": "",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 8,
+    "fields": {
+      "email": "test_client@test.test",
+      "name": "Test client",
+      "comments": "",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 9,
+    "fields": {
+      "email": "test_mail@mail.com",
+      "name": "test mail",
+      "comments": "",
+      "owner": 5
+    }
+  },
+  {
+    "model": "mailing.client",
+    "pk": 10,
+    "fields": {
+      "email": "test_gmail@gmail.com",
+      "name": "test gmail",
+      "comments": "",
+      "owner": 5
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 1,
+    "fields": {
+      "theme": "Платите меньше 🔥 Горячие предложения июля",
+      "body": "Мы рады поделиться с вами специальными предложениями на этот месяц. В августе вас ждут акции, которые помогут вам сэкономить и приобрести товары по выгодным ценам! С уважение, магазин детской одежды.",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 2,
+    "fields": {
+      "theme": "Классные новинки и хиты от 99 ₽",
+      "body": "Футболки от 119 ₽ • Лосины от 169 ₽ • Лонгсливы от 239 ₽. Экономить легко! С уважение, магазин детской одежды.",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 3,
+    "fields": {
+      "theme": "Снизили цены до предела",
+      "body": "Только одну неделю — сумасшедшие цены на детскую одежду и всё для работы, учёбы и дома. Дешевле вряд ли найти. Скорее в нашу подборку, пока всё не разобрали! С уважением, магазин детской одежды.",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 4,
+    "fields": {
+      "theme": "От −30% на коллекцию \"Весна-Лето\"",
+      "body": "Скидки от 30% на детскую одежду из коллекции \"Весна-Лето\". С уважение, магазин детской одежды.",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 5,
+    "fields": {
+      "theme": "Кэшбэк 20%!",
+      "body": "Выгодная акция! Возвращаем 20% с каждой второй покупки. Подробности на сайте.\nС уважение, магазин детской одежды.",
+      "owner": 1
+    }
+  },
+  {
+    "model": "mailing.message",
+    "pk": 6,
+    "fields": {
+      "theme": "Бантики для юных леди!",
+      "body": "Большой выбор бантиков для сада, прогулки, праздника. Подробнее на сайте bowshop.ru. С уважением, магазин BowShop.",
+      "owner": 5
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 1,
+    "fields": {
+      "start_datetime": "2024-07-24T00:40:00Z",
+      "end_datetime": "2024-07-25T03:40:00Z",
+      "periodicity": "once a week",
+      "mailing_status": "completed",
+      "message": 1,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 2,
+    "fields": {
+      "start_datetime": "2024-07-24T22:00:00Z",
+      "end_datetime": "2024-07-30T00:40:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 1,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 3,
+    "fields": {
+      "start_datetime": "2024-07-25T10:40:00Z",
+      "end_datetime": "2024-07-30T10:40:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 1,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        1,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 4,
+    "fields": {
+      "start_datetime": "2024-07-25T10:40:00Z",
+      "end_datetime": "2024-07-30T10:40:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 1,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 5,
+    "fields": {
+      "start_datetime": "2024-07-25T13:43:06Z",
+      "end_datetime": "2024-07-27T13:43:18Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 2,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 6,
+    "fields": {
+      "start_datetime": "2024-07-25T10:40:00Z",
+      "end_datetime": "2024-07-30T00:40:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 3,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 7,
+    "fields": {
+      "start_datetime": "2024-07-25T20:40:00Z",
+      "end_datetime": "2024-07-30T10:40:00Z",
+      "periodicity": "once a month",
+      "mailing_status": "completed",
+      "message": 3,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 9,
+    "fields": {
+      "start_datetime": "2024-07-27T13:19:05Z",
+      "end_datetime": "2024-07-29T13:19:13Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 4,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 10,
+    "fields": {
+      "start_datetime": "2024-07-27T13:31:47Z",
+      "end_datetime": "2024-07-28T13:32:02Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 4,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 11,
+    "fields": {
+      "start_datetime": "2024-07-27T20:34:10Z",
+      "end_datetime": "2024-07-28T20:34:19Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 4,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 12,
+    "fields": {
+      "start_datetime": "2024-07-27T20:44:24Z",
+      "end_datetime": "2024-07-29T20:44:29Z",
+      "periodicity": "once a day",
+      "mailing_status": "completed",
+      "message": 4,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 13,
+    "fields": {
+      "start_datetime": "2024-08-23T18:00:00Z",
+      "end_datetime": "2024-08-30T18:00:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "launched",
+      "message": 4,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5,
+        6
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 14,
+    "fields": {
+      "start_datetime": "2024-08-24T12:00:00Z",
+      "end_datetime": "2024-08-30T18:00:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "launched",
+      "message": 5,
+      "owner": 1,
+      "is_disabled": false,
+      "clients": [
+        5,
+        6,
+        7
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingsettings",
+    "pk": 15,
+    "fields": {
+      "start_datetime": "2024-08-28T06:40:00Z",
+      "end_datetime": "2024-08-30T18:00:00Z",
+      "periodicity": "once a day",
+      "mailing_status": "created",
+      "message": 6,
+      "owner": 5,
+      "is_disabled": false,
+      "clients": [
+        9,
+        10
+      ]
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 1,
+    "fields": {
+      "datetime_last_try": "2024-07-25T12:46:51.043Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 1
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 2,
+    "fields": {
+      "datetime_last_try": "2024-07-25T12:46:59.031Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 2
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 4,
+    "fields": {
+      "datetime_last_try": "2024-07-25T13:26:05.312Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 3
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 9,
+    "fields": {
+      "datetime_last_try": "2024-07-25T21:07:02.493Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 5
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 10,
+    "fields": {
+      "datetime_last_try": "2024-07-25T21:07:03.212Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 4
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 11,
+    "fields": {
+      "datetime_last_try": "2024-07-25T21:10:02.423Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 6
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 12,
+    "fields": {
+      "datetime_last_try": "2024-07-25T21:53:02.124Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 7
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 13,
+    "fields": {
+      "datetime_last_try": "2024-07-25T21:59:02.628Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 7
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 14,
+    "fields": {
+      "datetime_last_try": "2024-07-25T22:00:02.993Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 7
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 15,
+    "fields": {
+      "datetime_last_try": "2024-07-25T22:01:03.751Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 7
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 16,
+    "fields": {
+      "datetime_last_try": "2024-07-25T22:07:03.031Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 7
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 17,
+    "fields": {
+      "datetime_last_try": "2024-07-25T22:13:02.764Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 7
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 18,
+    "fields": {
+      "datetime_last_try": "2024-07-25T22:24:02.541Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 7
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 19,
+    "fields": {
+      "datetime_last_try": "2024-07-26T13:48:30.862Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 3
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 20,
+    "fields": {
+      "datetime_last_try": "2024-07-26T13:48:31.858Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 2
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 21,
+    "fields": {
+      "datetime_last_try": "2024-07-27T07:34:02.980Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 6
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 22,
+    "fields": {
+      "datetime_last_try": "2024-07-27T07:34:04.091Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 5
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 23,
+    "fields": {
+      "datetime_last_try": "2024-07-27T07:34:04.666Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 4
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 24,
+    "fields": {
+      "datetime_last_try": "2024-07-27T13:27:48.174Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 9
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 25,
+    "fields": {
+      "datetime_last_try": "2024-07-27T13:34:02.078Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 10
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 26,
+    "fields": {
+      "datetime_last_try": "2024-07-27T13:49:03.109Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 3
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 27,
+    "fields": {
+      "datetime_last_try": "2024-07-27T13:49:03.969Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 2
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 28,
+    "fields": {
+      "datetime_last_try": "2024-07-27T20:35:00.308Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 11
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 29,
+    "fields": {
+      "datetime_last_try": "2024-07-27T20:44:57.309Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 12
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 30,
+    "fields": {
+      "datetime_last_try": "2024-07-28T09:48:50Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 6
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 31,
+    "fields": {
+      "datetime_last_try": "2024-07-28T09:48:50.859Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 4
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 32,
+    "fields": {
+      "datetime_last_try": "2024-07-29T07:47:01.804Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 12
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 33,
+    "fields": {
+      "datetime_last_try": "2024-07-29T07:47:02.630Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 9
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 34,
+    "fields": {
+      "datetime_last_try": "2024-07-29T07:47:03.647Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 3
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 35,
+    "fields": {
+      "datetime_last_try": "2024-07-29T07:47:04.298Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 2
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 36,
+    "fields": {
+      "datetime_last_try": "2024-07-29T13:12:04.345Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 6
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 37,
+    "fields": {
+      "datetime_last_try": "2024-07-29T13:12:05.149Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 4
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 38,
+    "fields": {
+      "datetime_last_try": "2024-07-30T11:39:51.797Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 3
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 39,
+    "fields": {
+      "datetime_last_try": "2024-08-23T19:37:02.259Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 13
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 40,
+    "fields": {
+      "datetime_last_try": "2024-08-24T14:48:03.180Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 14
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 41,
+    "fields": {
+      "datetime_last_try": "2024-08-24T19:38:02.200Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 13
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 42,
+    "fields": {
+      "datetime_last_try": "2024-08-25T19:04:17.179Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 14
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 43,
+    "fields": {
+      "datetime_last_try": "2024-08-26T07:32:02.685Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 13
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 44,
+    "fields": {
+      "datetime_last_try": "2024-08-26T19:05:02.973Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 14
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 45,
+    "fields": {
+      "datetime_last_try": "2024-08-27T07:54:05.880Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 13
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 46,
+    "fields": {
+      "datetime_last_try": "2024-08-27T19:06:02.697Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 14
+    }
+  },
+  {
+    "model": "mailing.mailingattempt",
+    "pk": 47,
+    "fields": {
+      "datetime_last_try": "2024-08-28T09:53:00.935Z",
+      "attempt_status": "Successfully",
+      "response_mail_server": "",
+      "mailing": 13
+    }
+  }
+]
