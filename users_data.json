@@ -1,0 +1,102 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$dZQE86LCgsD0RVfutWqW4d$MhdJz8GZnTt2DD/CXnECktSZ5Gv24bmLULMpP35dink=",
+      "last_login": "2024-08-26T21:38:51.954Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-08-24T08:44:03.338Z",
+      "email": "krasnoruzhskayamarina@yandex.ru",
+      "phone_number": null,
+      "company": null,
+      "token": "1d259a337458f9961d03404bd13d7884",
+      "groups": [],
+      "user_permissions": [
+        51,
+        54,
+        29,
+        30,
+        31,
+        32,
+        44,
+        37,
+        38,
+        39,
+        40,
+        33,
+        34,
+        35,
+        36
+      ]
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$y1XHvV2Hb9tpTrnU4iiYNz$Lj/AckuKo7js60rFNNEZSIeFaS/HbSdAY4UKWrHWMIA=",
+      "last_login": "2024-08-26T22:26:38.058Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-08-24T09:08:15.768Z",
+      "email": "admin@mailing.com",
+      "phone_number": null,
+      "company": null,
+      "token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$q9ukrHplh1b934YVl7K9la$a4uMhf3ijI7OGHejGNYNgulPOVAMwu3rsDUr2pZd5l0=",
+      "last_login": "2024-08-26T22:32:07.365Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-08-24T21:44:52Z",
+      "email": "manager@mailing.com",
+      "phone_number": null,
+      "company": null,
+      "token": null,
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$xKpygKUddTM8wX9xXMi7Nb$IgykukHfyoLui4oiamlnwIIhaNZWs94AY2TlRXjqtD4=",
+      "last_login": "2024-08-25T19:24:14Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-08-25T19:18:39Z",
+      "email": "content@mailing.com",
+      "phone_number": null,
+      "company": null,
+      "token": null,
+      "groups": [
+        2
+      ],
+      "user_permissions": []
+    }
+  }
+]
