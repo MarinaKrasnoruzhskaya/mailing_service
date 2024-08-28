@@ -176,6 +176,14 @@ class MailingSettingsCreateView(LoginRequiredMixin, PermissionRequiredMixin, Cre
     permission_required = 'mailing.add_mailingsettings'
     success_url = reverse_lazy('mailing:settings')
 
+    def get_form(self, form_class=None):
+        """Метод возвращает в форме клиентов и сообщения, созданные авторизованным пользователем"""
+        form = super().get_form(form_class)
+        user = self.request.user
+        form.fields['message'].queryset = Message.objects.filter(owner=self.request.user)
+        form.fields['clients'].queryset = Client.objects.filter(owner=self.request.user)
+        return form
+
     def form_valid(self, form, **kwargs):
         """Метод для автоматической привязки владельца рассылки - пользователя"""
         mailing = form.save()
@@ -192,6 +200,13 @@ class MailingSettingsUpdateView(LoginRequiredMixin, PermissionRequiredMixin, Upd
 
     def get_success_url(self):
         return reverse('mailing:view_setting', args=[self.kwargs.get('pk')])
+
+    def get_form(self, form_class=None):
+        """Метод возвращает в форме клиентов и сообщения, созданные авторизованным пользователем"""
+        form = super().get_form(form_class)
+        form.fields['message'].queryset = Message.objects.filter(owner=self.request.user)
+        form.fields['clients'].queryset = Client.objects.filter(owner=self.request.user)
+        return form
 
 
 class MailingSettingsDeleteView(LoginRequiredMixin, DeleteView):

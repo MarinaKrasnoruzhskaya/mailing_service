@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <p class="card-text">Сообщение #{{ object.id }}</p>
                         <p class="card-text">{{ object.theme }}</p>
-                        <p class="card-text">{{ object.body }}</p>
+                        <p class="card-text">{{ object.body | truncatechars:100 }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a class="btn btn-outline-success" href="{% url 'mailing:view_message' object.pk %}"
